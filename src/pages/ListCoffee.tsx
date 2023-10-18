@@ -2,6 +2,8 @@ import { FunctionComponent } from "react";
 import { listCoffee } from "../api";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import Disclosure from "../components/Disclosure";
+import { buttonClassName } from "../components/Button";
 
 const ListCoffee: FunctionComponent = () => {
   const listCoffeeQuery = useQuery({
@@ -23,18 +25,34 @@ const ListCoffee: FunctionComponent = () => {
       <h2 className="mb-8 border-b text-lg font-semibold text-gray-900">
         List of coffees
       </h2>
-      <ul className="list-inside list-disc">
+
+      <div className="space-y-4">
         {listCoffeeQuery.data.map((coffee) => (
-          <li key={coffee.id}>
-            <Link
-              to={`/coffee/${coffee.id}/edit`}
-              className="underline transition-colors hover:text-blue-700"
-            >
-              {coffee.name}
-            </Link>
-          </li>
+          <Disclosure
+            key={coffee.id}
+            className="open:pb-4"
+            summary={coffee.name}
+          >
+            <div className="space-y-4">
+              <div>
+                <span className="font-semibold">Origin:</span> {coffee.origin}
+              </div>
+              <div>
+                <span className="font-semibold">Taste Notes:</span>{" "}
+                {coffee.tasteNotes.join(", ")}
+              </div>
+              <div>
+                <Link
+                  className={`${buttonClassName({ size: "xs" })}`}
+                  to={`/coffee/${coffee.id}/edit`}
+                >
+                  Edit coffee
+                </Link>
+              </div>
+            </div>
+          </Disclosure>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
