@@ -1,0 +1,32 @@
+{
+  "coffee": [
+    {
+      "id": "kenya-kii",
+      "name": "Kenya KII",
+      "tasteNotes": [
+        "blueberry",
+        "honey",
+        "floral"
+      ],
+      "origin": "Kenia",
+      "region": "Kirinyaga County",
+      "farm": "Rung'eto Cooperative Society",
+      "process": "washed",
+      "altitude": "1700"
+    },
+    {
+      "id": "el-rodeo",
+      "name": "Honduras El Rodeo",
+      "tasteNotes": [
+        "chocolate",
+        "berry",
+        "tropical fruit"
+      ],
+      "origin": "Honduras",
+      "region": "Las Pilas, Chinacla",
+      "farm": "Finca El Limon",
+      "process": "natural",
+      "altitude": "1300"
+    }
+  ]
+}
