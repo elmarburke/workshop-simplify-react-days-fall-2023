@@ -40,7 +40,16 @@ $ npm run dev
 	2. **Felder**: Verwende die Felder die in der `db.json`` zu sehen sind.
 	3. `Feldanzeige`:
 		Die Felder sollen der Reihe nach angezeigt werden.
+		Verwendet den Sibling-Selector (~) in eurem CSS o### 🏗️ Übung: Erstellung eines CreateCoffee-Formulars
+	1. Erstelle ein Formular mit dem Namen `CreateCoffeeForm`
+	2. **Felder**: Verwende die Felder die in der `db.json`` zu sehen sind.
+	3. `Feldanzeige`:
+		Die Felder sollen der Reihe nach angezeigt werden.
 		Verwendet den Sibling-Selector (~) in eurem CSS oder den entsprechenden `peer:`-Modificator in TailwindCSS, um die Anzeige der Felder zu steuern.
+	4. Platziert am Ende des Formulars einen Button mit dem Text "Create Coffee"
+    5. **Validierung**:
+        Validiert die Felder, bevor das Formular abgeschickt wird.
+        Verwendet die `required`-Attribute der HTML-Input-Elemente und das pattern-Attribut.der den entsprechenden `peer:`-Modificator in TailwindCSS, um die Anzeige der Felder zu steuern.
 	4. Platziert am Ende des Formulars einen Button mit dem Text "Create Coffee"
     5. **Validierung**:
         Validiert die Felder, bevor das Formular abgeschickt wird.
