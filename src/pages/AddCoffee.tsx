@@ -1,12 +1,52 @@
 import { FunctionComponent } from "react";
 import Field from "../components/Field";
 import Input from "../components/Input";
+import { useNavigate } from "react-router-dom";
+import { Coffee, addCoffee, coffeeSchema } from "../api";
+import { useMutation } from "@tanstack/react-query";
+import Button from "../components/Button";
 
 const AddCoffee: FunctionComponent = () => {
+  const navigate = useNavigate();
+  const addCoffeeMutation = useMutation({
+    mutationKey: ["coffee"],
+    mutationFn: (coffee: Coffee) => addCoffee(coffee),
+    onSuccess: () => {
+      navigate("/");
+    },
+  });
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+
+    const data = {
+      ...Object.fromEntries(formData.entries()),
+      tasteNotes: formData
+        .get("tasteNotes")
+        ?.toString()
+        .split(",")
+        .map((tasteNote) => tasteNote.trim()),
+    };
+
+    const value = coffeeSchema.safeParse(data);
+
+    if (!value.success) {
+      alert(`Error: ${value.error ?? "Unknown error"}`);
+      return;
+    }
+
+    addCoffeeMutation.mutate(value.data);
+  };
+
   return (
-    <div className="flex h-screen flex-col items-center justify-center">
+    <div>
       <h2>Add a new coffee to the database</h2>
-      <form className="flex max-w-xl flex-col space-y-4">
+      <form className="max-w-xl space-y-8" onSubmit={handleSubmit}>
+        <Field label="Id">
+          <Input type="text" required name="id" placeholder="kenya-kii" />
+        </Field>
+
         <Field label="Name">
           <Input type="text" required name="name" placeholder="Kenya KII" />
         </Field>
@@ -49,6 +89,13 @@ const AddCoffee: FunctionComponent = () => {
         <Field label="Altitude in metre">
           <Input type="text" required name="altitude" placeholder="1700" />
         </Field>
+
+        <div className="flex space-x-4">
+          <Button type="submit">Add coffee</Button>
+          <Button variant="secondary" type="reset">
+            Reset
+          </Button>
+        </div>
       </form>
     </div>
   );
