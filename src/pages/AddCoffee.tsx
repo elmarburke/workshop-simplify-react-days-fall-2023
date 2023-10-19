@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useId } from "react";
 import Field from "../components/Field";
 import Input from "../components/Input";
 import { useNavigate } from "react-router-dom";
@@ -39,6 +39,9 @@ const AddCoffee: FunctionComponent = () => {
     addCoffeeMutation.mutate(value.data);
   };
 
+  const formId = useId();
+  const originId = `${formId}-origin`;
+
   return (
     <div>
       <h2>Add a new coffee to the database</h2>
@@ -61,7 +64,21 @@ const AddCoffee: FunctionComponent = () => {
         </Field>
 
         <Field label="Origin">
-          <Input type="text" required name="origin" placeholder="Kenia" />
+          <Input
+            list={originId}
+            type="text"
+            required
+            name="origin"
+            placeholder="Kenia"
+          />
+
+          <datalist id={originId}>
+            <option value="Kenia" />
+            <option value="Ethiopia" />
+            <option value="Colombia" />
+            <option value="Costa Rica" />
+            <option value="Berlin" />
+          </datalist>
         </Field>
 
         <Field label="Region">
